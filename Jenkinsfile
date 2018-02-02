@@ -1,15 +1,20 @@
 pipeline {
   agent any
   stages {
-    stage('InstallAndAnalysis') {
+    stage('CheckoutAndBuild') {
       steps {
-        sh 'mvn clean install'
+        sh 'mvn clean install -DskipTests'
         hygieiaBuildPublishStep(buildStatus: 'Success')
       }
     }
-    stage('CheckStyle') {
+    stage('UnitTest') {
       steps {
-        hygieiaSonarPublishStep(ceQueryIntervalInSeconds: '2', ceQueryMaxAttempts: '10')
+        sh 'mvn '
+      }
+    }
+    stage('SonarQube Analysis') {
+      steps {
+        waitForQualityGate()
       }
     }
   }
