@@ -3,11 +3,11 @@ pipeline {
   stages {
     stage('CheckoutAndBuild') {
       steps {
-        sh 'mvn clean install --DskipTests'
+        sh 'mvn clean install -DskipTests'
         hygieiaBuildPublishStep(buildStatus: 'Success')
       }
     }
-    stage('CheckStyle') {
+    stage('UnitTest') {
       steps {
         sh 'mvn test'
       }
@@ -20,7 +20,7 @@ pipeline {
         }
     }
     stage('SonarQube Quality Gate') {
-      steps {
+ 		steps {
         waitForQualityGate()
       }
     }
