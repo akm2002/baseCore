@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('CheckoutAndBuild') {
+    stage('BuildArtifact') {
       steps {
         sh 'mvn clean install -DskipTests'
         hygieiaBuildPublishStep(buildStatus: 'Success')
