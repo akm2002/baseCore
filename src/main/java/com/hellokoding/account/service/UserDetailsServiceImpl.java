@@ -1,8 +1,8 @@
 package com.hellokoding.account.service;
 
-import com.hellokoding.account.model.Role;
-import com.hellokoding.account.model.User;
-import com.hellokoding.account.repository.UserRepository;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,8 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.hellokoding.account.model.Role;
+import com.hellokoding.account.model.User;
+import com.hellokoding.account.repository.UserRepository;
 
 public class UserDetailsServiceImpl implements UserDetailsService{
     @Autowired

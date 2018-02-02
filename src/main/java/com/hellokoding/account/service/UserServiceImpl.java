@@ -1,13 +1,14 @@
 package com.hellokoding.account.service;
 
-import com.hellokoding.account.model.User;
-import com.hellokoding.account.repository.RoleRepository;
-import com.hellokoding.account.repository.UserRepository;
+import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import com.hellokoding.account.model.User;
+import com.hellokoding.account.repository.RoleRepository;
+import com.hellokoding.account.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {

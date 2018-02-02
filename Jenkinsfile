@@ -1,15 +1,27 @@
 pipeline {
   agent any
   stages {
-    stage('InstallAndAnalysis') {
+    stage('CheckoutAndBuild') {
       steps {
-        sh 'mvn clean install'
+        sh 'mvn clean install --DskipTests'
         hygieiaBuildPublishStep(buildStatus: 'Success')
       }
     }
     stage('CheckStyle') {
       steps {
-        hygieiaSonarPublishStep(ceQueryIntervalInSeconds: '2', ceQueryMaxAttempts: '10')
+        sh 'mvn test'
+      }
+    }
+    stage('SonarQube analysis') {
+    	def sonarqubeScannerHome = tool name: 'SonarQube Scanner'
+    	
+        withSonarQubeEnv('SonarQube') { 
+          sh "${sonarqubeScannerHome}/bin/sonar-scanner"
+        }
+    }
+    stage('SonarQube Quality Gate') {
+      steps {
+        waitForQualityGate()
       }
     }
   }
