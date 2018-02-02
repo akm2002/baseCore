@@ -13,11 +13,15 @@ pipeline {
       }
     }
     stage('SonarQube analysis') {
-    	def sonarqubeScannerHome = tool name: 'SonarQube Scanner'
-    	
-        withSonarQubeEnv('SonarQube') { 
-          sh "${sonarqubeScannerHome}/bin/sonar-scanner"
-        }
+     steps {
+	    script {
+	    	def sonarqubeScannerHome = tool 'SonarQube Scanner'
+	    	
+	        withSonarQubeEnv('SonarQube') { 
+	          sh "${sonarqubeScannerHome}/bin/sonar-scanner"
+	        }
+	     }
+      }
     }
     stage('SonarQube Quality Gate') {
  		steps {
