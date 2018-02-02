@@ -9,7 +9,8 @@ pipeline {
     }
     stage('UnitTest') {
       steps {
-        sh 'mvn '
+        sh '''echo $WORKSPACE
+echo ${sonarqubeScannerHome}'''
       }
     }
     stage('SonarQube Analysis') {
