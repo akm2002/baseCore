@@ -29,5 +29,10 @@ pipeline {
         hygieiaArtifactPublishStep(artifactVersion: '1.0-SNAPSHOT', artifactGroup: 'com.coding', artifactDirectory: 'target', artifactName: 'baseCore-*.war')
       }
     }
+    stage('LaunchNexusArtifact') {
+      steps {
+        sleep 1
+      }
+    }
   }
 }
