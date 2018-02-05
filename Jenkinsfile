@@ -13,14 +13,20 @@ pipeline {
       }
     }
     stage('SonarQube analysis') {
-     steps {
-	    script {
-	    	def sonarqubeScannerHome = tool 'SonarQube Scanner'
-	    	
-	        withSonarQubeEnv('SonarQube') { 
-	          sh "${sonarqubeScannerHome}/bin/sonar-scanner"
-	        }
-	     }
+      steps {
+        script {
+          def sonarqubeScannerHome = tool 'SonarQube Scanner'
+          
+          withSonarQubeEnv('SonarQube') {
+            sh "${sonarqubeScannerHome}/bin/sonar-scanner"
+          }
+        }
+        
+      }
+    }
+    stage('PublishHygieia') {
+      steps {
+        hygieiaArtifactPublishStep(artifactVersion: '1.0-SNAPSHOT', artifactGroup: 'com.coding', artifactDirectory: 'target', artifactName: 'baseCore-*.war')
       }
     }
   }
