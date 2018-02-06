@@ -2,9 +2,18 @@ pipeline {
   agent any
   stages {
     stage('BuildArtifact') {
-      steps {
-        sh 'mvn clean install -DskipTests'
-        hygieiaBuildPublishStep(buildStatus: 'Success')
+      parallel {
+        stage('BuildArtifact') {
+          steps {
+            sh 'mvn clean install -DskipTests'
+            hygieiaBuildPublishStep(buildStatus: 'Success')
+          }
+        }
+        stage('') {
+          steps {
+            error 'EVN error'
+          }
+        }
       }
     }
     stage('UnitTest') {
