@@ -13,12 +13,22 @@ pipeline {
       }
     }
     stage('SonarQube analysis') {
-      steps {
-        script {
-          def sonarqubeScannerHome = tool 'SonarQube Scanner'
-          
-          withSonarQubeEnv('SonarQube') {
-            sh "${sonarqubeScannerHome}/bin/sonar-scanner"
+      parallel {
+        stage('SonarQube analysis') {
+          steps {
+            script {
+              def sonarqubeScannerHome = tool 'SonarQube Scanner'
+              
+              withSonarQubeEnv('SonarQube') {
+                sh "${sonarqubeScannerHome}/bin/sonar-scanner"
+              }
+            }
+            
+          }
+        }
+        stage('') {
+          steps {
+            hygieiaCodeQualityPublishStep()
           }
         }
       }
