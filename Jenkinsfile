@@ -1,5 +1,6 @@
 pipeline {
   agent any
+  def version = '1.0-SNAPSHOT'
   stages {
     stage('BuildArtifact') {
       steps {
@@ -26,13 +27,26 @@ pipeline {
     }
     stage('PublishHygieia') {
       steps {
-        hygieiaArtifactPublishStep(artifactVersion: '1.0-SNAPSHOT', artifactGroup: 'com.coding', artifactDirectory: 'target', artifactName: 'baseCore-*.war')
+        hygieiaArtifactPublishStep(artifactVersion: ${version}, artifactGroup: 'com.coding', artifactDirectory: 'target', artifactName: 'baseCore-*.war')
       }
     }
     stage('LaunchNexusArtifact') {
       steps {
-        sleep 1
+      nexusArtifactUploader {
+        nexusVersion('nexus2')
+        protocol('http')
+        nexusUrl('172.21.16.193:8080/nexus')
+        groupId('com.coding')
+        version(${version})
+        repository('releases')
+        artifact {
+            artifactId('baseCore')
+            type('war')
+            classifier('debug')
+            file('target/')
+        }
       }
+    }
     }
   }
 }
