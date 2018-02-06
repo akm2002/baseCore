@@ -45,7 +45,8 @@ pipeline {
     }
     stage('LaunchPODServer') {
       steps {
-        sh ' scp target/baseCore-1.0-SNAPSHOT.war root@120.78.64.14:/opt/tomcat/webapps'
+        sh '''mv target/baseCore-1.0-SNAPSHOT.war target/baseCore.war
+scp target/baseCore.war root@120.78.64.14:/opt/tomcat/webapps'''
       }
     }
   }
