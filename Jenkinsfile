@@ -31,9 +31,9 @@ pipeline {
             hygieiaArtifactPublishStep(artifactVersion: '1.0-SNAPSHOT', artifactGroup: 'com.coding', artifactDirectory: 'target', artifactName: 'baseCore-*.war')
           }
         }
-        stage('') {
+        stage('error') {
           steps {
-            hygieiaDeployPublishStep(artifactDirectory: 'target', artifactName: 'baseCode', artifactGroup: 'com.coding', artifactVersion: '1.0-SNAPSHOT', applicationName: 'BASECODE', environmentName: 'SIT', buildStatus: 'Success')
+            hygieiaDeployPublishStep(artifactDirectory: 'target', artifactName: 'baseCore-1.0-SNAPSHOT.war', artifactGroup: 'com.coding', artifactVersion: '1.0-SNAPSHOT', applicationName: 'BASECODE', environmentName: 'SIT', buildStatus: 'Success')
           }
         }
       }
