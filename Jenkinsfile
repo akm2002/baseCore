@@ -31,7 +31,7 @@ pipeline {
             hygieiaArtifactPublishStep(artifactVersion: '1.0-SNAPSHOT', artifactGroup: 'com.coding', artifactDirectory: 'target', artifactName: 'baseCore-*.war')
           }
         }
-        stage('error') {
+        stage('PublishDeploymentHygieia') {
           steps {
             hygieiaDeployPublishStep(artifactDirectory: 'target', artifactName: 'baseCore-1.0-SNAPSHOT.war', artifactGroup: 'com.coding', artifactVersion: '1.0-SNAPSHOT', applicationName: 'BASECODE', environmentName: 'SIT', buildStatus: 'Success')
           }
@@ -41,6 +41,11 @@ pipeline {
     stage('LaunchNexusArtifact') {
       steps {
         sh 'mvn deploy'
+      }
+    }
+    stage('LaunchPODServer') {
+      steps {
+        sh ' scp target/baseCore-1.0-SNAPSHOT.war root@120.78.64.14:/opt/tomcat/webapps'
       }
     }
   }
