@@ -2,12 +2,10 @@ pipeline {
   agent any
   stages {
     stage('BuildArtifact') {
-        stage('BuildArtifact') {
-          steps {
-            sh 'mvn clean install -DskipTests'
-            hygieiaBuildPublishStep(buildStatus: 'Success')
-          }
-        }
+      steps {
+         sh 'mvn clean install -DskipTests'
+         hygieiaBuildPublishStep(buildStatus: 'Success')
+       }
     }
     stage('UnitTest') {
       steps {
