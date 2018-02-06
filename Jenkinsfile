@@ -1,21 +1,6 @@
 pipeline {
   agent any
   stages {
-  stage('Precondition Check') {
-      parallel {
-        stage('Server1') {
-          steps {
-          	echo ''
-          }
-        }
-        stage('Server2') {
-          steps {
-          	echo ''
-            //error 'EVN error'
-          }
-        }
-      }
-    }
     stage('BuildArtifact') {
         stage('BuildArtifact') {
           steps {
