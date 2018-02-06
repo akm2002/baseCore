@@ -30,21 +30,8 @@ pipeline {
     }
     stage('LaunchNexusArtifact') {
       steps {
-      nexusArtifactUploader {
-        nexusVersion('nexus2')
-        protocol('http')
-        nexusUrl('172.21.16.193:8080/nexus')
-        groupId('com.coding')
-        version('1.0-SNAPSHOT')
-        repository('releases')
-        artifact {
-            artifactId('baseCore')
-            type('war')
-            classifier('debug')
-            file('target/')
-        }
+        sh 'mvn deploy'
       }
-    }
     }
   }
 }
