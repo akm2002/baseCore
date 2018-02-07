@@ -41,7 +41,8 @@ pipeline {
     }
     stage('LaunchNexusArtifact') {
       steps {
-        sh '''mvn deploy -DskipTests
+        sh '''mvn deploy  -DskipTests
+
 '''
       }
     }
