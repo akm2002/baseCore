@@ -3,10 +3,8 @@ pipeline {
   stages {
     stage('BuildArtifact') {
       steps {
-        sh '''#mvn clean  install  -DskipTests
-mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true
-
-mvn sonar:sonar'''
+        sh '''mvn clean  install  -DskipTests
+'''
         hygieiaBuildPublishStep(buildStatus: 'Success')
       }
     }
@@ -43,7 +41,11 @@ mvn sonar:sonar'''
     }
     stage('LaunchNexusArtifact') {
       steps {
-        sh 'mvn deploy -DskipTests'
+        sh '''mvn deploy -DskipTests
+
+mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true
+
+mvn sonar:sonar'''
       }
     }
     stage('LaunchPODServer') {
