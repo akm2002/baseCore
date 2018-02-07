@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('BuildArtifact') {
       steps {
-        sh 'mvn clean install -DskipTests'
+        sh 'mvn org.jacoco:jacoco-maven-plugin:prepare-agent clean install -DskipTests'
         hygieiaBuildPublishStep(buildStatus: 'Success')
       }
     }
