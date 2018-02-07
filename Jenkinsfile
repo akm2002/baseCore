@@ -42,8 +42,7 @@ pipeline {
     stage('LaunchNexusArtifact') {
       steps {
         sh '''mvn deploy -DskipTests
-mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true
-mvn sonar:sonar'''
+'''
       }
     }
     stage('LaunchPODServer') {
