@@ -14,6 +14,6 @@ public class UUIDUtilTest {
 	@Test
     public void testGetUUID(){
         assertTrue(!UUIDUtil.getUUID().equals(""));
-        assertTrue(UUIDUtil.getUUID().equals("-"));
+        assertTrue(!UUIDUtil.getUUID().equals("-"));
     }
 }
