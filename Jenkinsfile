@@ -10,7 +10,8 @@ pipeline {
     }
     stage('UnitTest') {
       steps {
-        sh 'mvn test'
+        sh '''#mvn test
+mvn clean package -Dmaven.test.skip=false'''
       }
     }
     stage('SonarQube analysis') {
